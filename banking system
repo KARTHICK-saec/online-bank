@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simple Online Banking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bank-container">
+    <h1>My Bank</h1>
+
+    <div class="section">
+      <h2>Balance</h2>
+      <p id="balance">$1000.00</p>
+    </div>
+
+    <div class="section">
+      <h2>Transfer Funds</h2>
+      <input type="text" id="recipient" placeholder="Recipient Name">
+      <input type="number" id="amount" placeholder="Amount">
+      <button onclick="transferMoney()">Send</button>
+      <p id="message"></p>
+    </div>
+
+    <div class="section">
+      <h2>Transaction History</h2>
+      <ul id="history"></ul>
+    </div>
+  </div>
+
+  <script>
+    let balance = 1000;
+
+    function updateBalance() {
+      document.getElementById('balance').innerText = `$${balance.toFixed(2)}`;
+    }
+
+    function transferMoney() {
+      const recipient = document.getElementById('recipient').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const message = document.getElementById('message');
+      const history = document.getElementById('history');
+
+      if (!recipient || isNaN(amount) || amount <= 0) {
+        message.innerText = "Enter valid recipient and amount.";
+        return;
+      }
+
+      if (amount > balance) {
+        message.innerText = "Insufficient balance.";
+        return;
+      }
+
+      balance -= amount;
+      updateBalance();
+      message.innerText = `Sent $${amount.toFixed(2)} to ${recipient}.`;
+
+      const li = document.createElement('li');
+      li.innerText = `Sent $${amount.toFixed(2)} to ${recipient}`;
+      history.prepend(li);
+
+      document.getElementById('recipient').value = '';
+      document.getElementById('amount').value = '';
+    }
+
+    updateBalance();
+  </script>
+</body>
+</html>
+
+----------------------style------------------------
+body {
+  font-family: sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+  padding: 20px;
+}
+
+.bank-container {
+  max-width: 400px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333;
+}
+
+.section {
+  margin-top: 20px;
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#message {
+  color: red;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+=====================================================================
