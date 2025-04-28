@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Feedback</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Product Feedback</h2>
+    <form id="feedbackForm">
+      <label>Rate the product:</label>
+      <div class="rating">
+        <label><input type="radio" name="rating" value="1" required /> 1</label>
+        <label><input type="radio" name="rating" value="2" /> 2</label>
+        <label><input type="radio" name="rating" value="3" /> 3</label>
+        <label><input type="radio" name="rating" value="4" /> 4</label>
+        <label><input type="radio" name="rating" value="5" /> 5</label>
+      </div>
+
+      <label for="comment">Your feedback:</label>
+      <textarea id="comment" rows="4" placeholder="Write your thoughts..."></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="responseMessage" class="response"></div>
+  </div>
+
+  <script>
+    document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const rating = document.querySelector('input[name="rating"]:checked').value;
+      const comment = document.getElementById("comment").value;
+
+      document.getElementById("responseMessage
+--------------------------------------------------------------------
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 400px;
+  background: white;
+  padding: 30px;
+  margin: 50px auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.rating {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.rating label {
+  font-size: 18px;
+}
+
+textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  resize: none;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #28a745;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #218838;
+}
+
+.response {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+=========================================
