@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pharmacy Inventory System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Pharmacy Inventory</h1>
+    </header>
+
+    <div class="add-medicine">
+      <h2>Add Medicine</h2>
+      <form id="addMedicineForm">
+        <label for="medicineName">Medicine Name:</label>
+        <input type="text" id="medicineName" required />
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" required />
+
+        <label for="price">Price per Unit (₹):</label>
+        <input type="number" id="price" required />
+
+        <button type="submit">Add Medicine</button>
+      </form>
+    </div>
+
+    <div class="inventory">
+      <h2>Medicine Inventory</h2>
+      <ul id="inventoryList">
+        <li>No medicines in inventory.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const addMedicineForm = document.getElementById("addMedicineForm");
+    const inventoryList = document.getElementById("inventoryList");
+
+    addMedicineForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const medicineName = document.getElementById("medicineName").value;
+      const quantity = document.getElementById("quantity").value;
+      const price = document.getElementById("price").value;
+
+      const inventoryItem = document.createElement("li");
+      inventoryItem.innerHTML = `${medicineName} - Quantity: ${quantity} - ₹${price} per unit 
+      <button class="removeItem">Remove</button>`;
+
+      // Add remove button functionality
+      inventoryItem.querySelector(".removeItem").addEventListener("click", function () {
+        inventoryItem.remove();
+        if (inventoryList.children.length === 0) {
+          inventoryList.innerHTML = "<li>No medicines in inventory.</li>";
+        }
+      });
+
+      inventoryList.appendChild(inventoryItem);
+
+      // Reset form
+      addMedicineForm.reset();
+    });
+  </script>
+</body>
+</html>
+
+============================================================
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 36px;
+  color: #2c3e50;
+}
+
+.add-medicine, .inventory {
+  margin-top: 30px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+form label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #333;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #27ae60;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #219150;
+}
+
+.inventory ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.inventory li {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #f1f1f1;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.removeItem {
+  background-color: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.removeItem:hover {
+  background-color: #c0392b;
+}
